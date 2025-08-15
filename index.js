@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("MongoDB connected"))
 .catch(err => console.error("MongoDB connection error:", err));
 
-const cors = require("cors");
+
 
 app.use(cors({
   origin: "https://Durgaprasadgalla.github.io"
@@ -33,3 +33,4 @@ app.use("/api/exam", examRoutes);
 app.get("/", (req, res) => res.send("API is running..."));
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
