@@ -39,7 +39,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.js";
 import examRoutes from "./routes/exam.js";
-const userRoutes = require("./routes/users.js");
+import userRoutes from "./routes/users.js";
 
 dotenv.config();
 const app = express();
@@ -88,6 +88,7 @@ app.get("/", (req, res) => res.send("API is running..."));
 
 // Start server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
 
 
