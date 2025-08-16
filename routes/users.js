@@ -1,14 +1,10 @@
-const express = require("express");
+// routes/users.js
+import express from "express";
 const router = express.Router();
 
-// Example GET users route
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find(); // MongoDB query
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+// example route
+router.get("/", (req, res) => {
+  res.send("User route working");
 });
 
-module.exports = router;
+export default router;   // 👈 this is important
