@@ -1,4 +1,5 @@
 import express from "express";
+import bcrypt from "bcrypt";
 import User from "../models/User.js";
 
 export const router = express.Router();
@@ -17,9 +18,19 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const newUser = new User({ username, password });
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Save new user
+    const newUser = new User({
+      username,
+      password: hashedPassword
+    });
+
     await newUser.save();
-    res.status(201).json(newUser);
+    res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
