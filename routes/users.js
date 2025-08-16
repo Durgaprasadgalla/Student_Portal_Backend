@@ -19,21 +19,28 @@ router.post("/", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Hash password
+    // check if username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
+
+    // hash password before saving
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Save new user
+    // create new user with hashed password
     const newUser = new User({
       username,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     await newUser.save();
-    res.status(201).json({ message: "User created successfully" });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    res.status(201).json({ message: "User created successfully", user: newUser });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
+
 
 export default router;
