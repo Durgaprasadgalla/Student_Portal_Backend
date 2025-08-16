@@ -53,7 +53,7 @@ app.use(cors({
     const allowedOrigins = [
       "http://localhost:3000",
       "https://Durgaprasadgalla.github.io",
-      "https://bright-boba-c637cb.netlify.app"
+      "https://student-eaxm-portal.netlify.app"
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -83,5 +83,6 @@ app.get("/", (req, res) => res.send("API is running..."));
 
 // Start server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
 
